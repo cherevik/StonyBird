@@ -1,0 +1,6 @@
+#gameboard {
+    background-image:url('../img/bg.png');
+    display:block;
+    width:900px;
+    margin:20px auto;    
+}
