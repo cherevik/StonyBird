@@ -4,13 +4,17 @@ var Game = Class.extend({
     height: 0, 
     entities: [],
     prevTime : 0,
+    bird: null, 
 
     init: function(canvas) {
         this.canvas = canvas; 
         this.width = parseInt(canvas.getAttribute("width")); 
         this.height = parseInt(canvas.getAttribute("height")); 
         this.entities.push(new Ground(this, 0, 504)); 
-        this.entities.push(new Bird(this, 400, 100)); 
+        
+        this.bird = new Bird(this, 100, 100);
+        this.entities.push(this.bird); 
+        this.prevTime = Date.now();
         
         var self = this;
         window.addEventListener('keydown', function(evt) {
@@ -26,8 +30,8 @@ var Game = Class.extend({
     
     main: function() {
         var now = Date.now(); 
-        var dt = (now - this.prevTime) / 1000.0; 
         
+        var dt = (now - this.prevTime) / 1000.0; 
         this.update(dt); 
         this.draw(); 
         
@@ -58,9 +62,9 @@ var Game = Class.extend({
     onKeyDown: function(evt) {
         switch (evt.keyCode) {
             case 32: 
-                console.log("Space pressed");
+                this.bird.flap();    
                 break;
         }
-    }
+    } 
 
 });
