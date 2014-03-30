@@ -9,7 +9,7 @@ var Bird = Entity.extend({
     init: function(game, x, y) {
         this._super(game, x, y); 
         this.sprite = new Sprite("img/bird.png", 0, 0, 85, 60, 10, [0,1,2]);
-        this.maxy = game.height - 156; 
+        this.maxy = game.boardHeight - 60; 
     }, 
     
     update: function(dt) {
@@ -37,8 +37,13 @@ var Bird = Entity.extend({
     }, 
     
     flap: function() {
-        this.velocity = -300; 
+        this.velocity = -200; 
         this.angle = -Math.PI/6;
+    }, 
+    
+    getBoundingRectangle : function() {
+        // not taking into account the rotation angle 
+        return { top: this.y, left: this.x, right: this.x + this.sprite.width, bottom: this.y + this.sprite.height };
     }
     
 });
