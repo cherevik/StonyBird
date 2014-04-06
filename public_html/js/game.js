@@ -9,6 +9,7 @@ var Game = Class.extend({
     prevTime : 0,
     bird: null, 
     pipeTimer: null, 
+    score: 0, 
 
     init: function(canvas) {
         this.canvas = canvas; 
@@ -25,11 +26,15 @@ var Game = Class.extend({
     }, 
     
     start: function() {
+        this.score = 0;
         this.prevTime = Date.now();
         
         // create the moving ground 
         this.entities = new Array();
         this.entities.push(new Ground(this, 0, this.boardHeight)); 
+        
+        // add score entity 
+        this.entities.push(new Score(this)); 
         
         // create the bird  
         this.bird = new Bird(this, 100, 100);
@@ -60,13 +65,15 @@ var Game = Class.extend({
         this.update(dt); 
         
         // delete entities that are marked as deleted 
-        var len = this.entities.length; 
+        var len = this.entities.length;
+        var origlen = len; 
         while (len --) {
             var e = this.entities[len];
             if (e.isDeleted()) {
                 this.entities.splice(len, 1); 
             }
         }        
+        this.score += (origlen - this.entities.length)/2;
         
         // draw the board 
         this.draw(); 
@@ -87,6 +94,7 @@ var Game = Class.extend({
     }, 
     
     draw: function() {
+        this.entities.sort(function(a,b) { return a.zindex - b.zindex; });
         var ctx = this.getContext(); 
         ctx.clearRect(0, 0, this.width, this.height);
         for (var i = 0; i < this.entities.length; i ++) {

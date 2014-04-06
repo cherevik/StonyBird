@@ -5,7 +5,7 @@ var Pipe = Entity.extend({
     speed: 150,
     
     init: function(game, height, location) {
-        this._super(game, game.width, 0); 
+        this._super(game, game.width, 0, 10); 
         this.height = height; 
         this.location = location; 
         this.image = new Image(); 

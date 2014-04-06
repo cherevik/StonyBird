@@ -6,7 +6,7 @@ var Ground = Entity.extend({
     speed: 150, 
     
     init: function(game, x, y) {
-        this._super(game, x, y); 
+        this._super(game, x, y, 10); 
         this.scrollPos = 0; 
         this.image = new Image(); 
         

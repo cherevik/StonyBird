@@ -1,13 +1,15 @@
 var Entity = Class.extend({
     x: 0, 
     y: 0, 
+    zindex: 0,
     game: null, 
     deleted: false,
     
-    init: function(game, x, y) {
+    init: function(game, x, y, zindex) {
         this.game = game; 
         this.x = x; 
         this.y = y; 
+        this.zindex = zindex; 
     },
     
     draw: function() {

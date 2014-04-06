@@ -7,7 +7,7 @@ var Bird = Entity.extend({
     maxy: 0, 
     
     init: function(game, x, y) {
-        this._super(game, x, y); 
+        this._super(game, x, y, 10); 
         this.sprite = new Sprite("img/bird.png", 0, 0, 85, 60, 10, [0,1,2]);
         this.maxy = game.boardHeight - 60; 
     }, 
